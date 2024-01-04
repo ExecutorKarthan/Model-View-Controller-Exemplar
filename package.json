@@ -1,0 +1,30 @@
+{
+  "name": "model-view-controller-exemplar",
+  "version": "1.0.0",
+  "description": "This is a mock tech blog that illistrates the use of the MVC ideaology",
+  "main": "server.js",
+  "scripts": {
+    "test": "jtest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExecutorKarthan/Model-View-Controller-Exemplar.git"
+  },
+  "author": "Alex Messina",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.0.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "bugs": {
+    "url": "https://github.com/ExecutorKarthan/Model-View-Controller-Exemplar/issues"
+  },
+  "homepage": "https://github.com/ExecutorKarthan/Model-View-Controller-Exemplar#readme"
+}
