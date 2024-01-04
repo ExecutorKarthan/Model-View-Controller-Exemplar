@@ -9,4 +9,4 @@ Post.belongsTo(Gallery, {
   foreignKey: 'user_id',
 });
 
-module.exports = { User, Post,};
+module.exports = { User, Post};
