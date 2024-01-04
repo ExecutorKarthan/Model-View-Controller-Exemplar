@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
 
-    res.render('homepage', {
+    res.render('home', {
       posts,
     });
   } catch (err) {
@@ -19,9 +19,11 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  
     res.render('login');
   });
 
+router.get('/signup', (req, res) => {
+    res.render('signup');
+  });
 
 module.exports = router;

@@ -5,7 +5,7 @@ User.hasMany(Post, {
   foreignKey: 'user_id',
 });
 
-Post.belongsTo(Gallery, {
+Post.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
