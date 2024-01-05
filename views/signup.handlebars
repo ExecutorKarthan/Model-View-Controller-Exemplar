@@ -1,14 +1,16 @@
-<form>
-  <div class="mb-3">
+<form class="form signup-form">
+  <div class="form-group">
     <label for="username-label" class="form-label">Username</label>
-    <input type="text" class="form-control" id="username-entered" aria-describedby="emailHelp">
+    <input type="text" class="form-input" id="signup-username" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3">
+  <div class="form-group">
     <label for="password-label" class="form-label">Password</label>
-    <input type="text" class="form-control" id="entered-password">
+    <input type="password" class="form-input" id="signup-password">
   </div>
-  <div class="mb-3">
+  <div class="form-group">
     <a href="/login">Login instead</a>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script src="./js/signup.js"></script>

@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     );
 
     res.render('home', {
-      posts,
+      posts
     });
   } catch (err) {
     console.log(err);
