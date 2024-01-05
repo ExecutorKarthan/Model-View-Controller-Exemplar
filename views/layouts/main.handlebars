@@ -11,7 +11,11 @@
         <div class = "row">
             <a href="/" class = "col"> Home </a>
             <a href="/" class = "col"> Dashboard </a>
-            <a href="/login" class = "col"> Login </a>
+            {{#if loggedIn}}
+              <button id="logout" class="btn-no-style">Logout</button>
+            {{else}}
+              <a href="/login" class = "col" if="'login"> Login </a>
+            {{/if}}
         </div>
         <div class = "row">
             <h1>Code Corner</h1>
@@ -21,6 +25,11 @@
      {{{ body }}}
     </main>
   </div>
+  <footer>
+  </footer>
+  {{#if loggedIn}}
+  <script src="./js/logout.js"></script>
+  {{/if}}
   </body>
 
 </html>

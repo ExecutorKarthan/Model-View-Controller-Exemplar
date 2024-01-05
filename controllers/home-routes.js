@@ -10,7 +10,8 @@ router.get('/', async (req, res) => {
     );
 
     res.render('home', {
-      posts
+      posts,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);
