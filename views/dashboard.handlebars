@@ -1,17 +1,7 @@
 <div class="dashboard">
     <section class="flex-row justify-center">
-        {{#if make_post}}
-            <form class = "form login-form">
-                <div class="form-group">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-input" id="post-title">
-                </div>
-                <div class="form-group">
-                    <label for="content" class="form-label">Content</label>
-                    <input type="text" class="form-input" id="post-content">
-                </div>
-                <button type="submit" class="btn btn-primary" id="create-post">Create</button>
-            </form>
+        {{#if makePost}}
+            {{> post-form}}
         {{else}}
             {{#each post as |post|}}
                 {{> single-post}}
@@ -21,4 +11,3 @@
     <button type="click" class="btn btn-primary" id="new-post-form">+ New Post</button>
 </div>
 <script src="./js/dashboard.js"></script>
-

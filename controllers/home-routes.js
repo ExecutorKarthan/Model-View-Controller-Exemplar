@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Post } = require('../models');
 const withAuth = require('../utilities/auth');
-const adjustPost = require('../utilities/post');
+const renderSelector = require('../utilities/renderSelector');
 
 router.get('/', async (req, res) => {
   try {
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/dashboard', withAuth, adjustPost, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
@@ -33,7 +33,8 @@ router.get('/dashboard', withAuth, adjustPost, async (req, res) => {
 
     res.render('dashboard', {
       ...user,
-      loggedIn: true
+      loggedIn: renderSelector(req.session.loggedIn),
+      makePost: renderSelector(req.session.makePost),
     });
   } catch (err) {
     res.status(500).json(err);

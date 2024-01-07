@@ -2,15 +2,23 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utilities/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.post('/create-post', withAuth, async (req, res) =>{
   try{
-    res.render('dashboard', {  
-      make_post: true
+    req.session.save(() => {
+      req.session.makePost = true;
     });
-  } catch (err) {
+
+    res
+    .status(200)
+    .render('dashboard', {
+      makePost: req.session.makePost,
+    });
+  }
+  catch{
+    console.log(err);
     res.status(500).json(err);
-    };
-  });
+  }
+})
 
 router.post('/', withAuth, async (req, res) => {
   try {

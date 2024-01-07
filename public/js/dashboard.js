@@ -1,13 +1,14 @@
 const createPostClicked = async (event) =>{
   event.preventDefault();
   console.log("+New Post button clicked")
-  const response = await fetch('/api/bpr/', {
-    method: 'GET',
+  const response = await fetch('/api/bpr/create-post', {
+    method: 'POST',
+    body: JSON.stringify({}),
+    headers: { 'Content-Type': 'application/json' },
   });
-  console.log(response)
   if (response.ok) {
-    document.location.replace('/api/bpr/');
-  } 
+    document.location.replace('/dashboard');
+    } 
 }
 
 const newPostHandler = async (event) => {
@@ -23,8 +24,8 @@ const newPostHandler = async (event) => {
         headers: { 'Content-Type': 'application/json' },
       });
       console.log(response)
-      if (response.ok) {
-        document.location.replace('/');
+      if (!response.ok) {
+        document.location.replace('/dashboard');
       } 
       else {
         alert(response.statusText);

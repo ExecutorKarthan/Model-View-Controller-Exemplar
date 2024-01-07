@@ -29,11 +29,12 @@ router.post('/login', async (req, res) => {
       },
     });
 
+    console.log(dbUserData)
+
     if (!dbUserData) {
       res
         .status(400)
         .json({ message: 'Incorrect email or password. Please try again!' });
-      alert('Incorrect email or password. Please try again!')
       return;
     }
 
@@ -51,10 +52,12 @@ router.post('/login', async (req, res) => {
       req.session.loggedIn = true;
     });
 
+    console.log(req.session.loggedIn)
+
     res
     .status(200)
     .render('dashboard', {
-      loggedIn: req.session.loggedIn,
+      loggedIn: true,
     });
 
   } catch (err) {
