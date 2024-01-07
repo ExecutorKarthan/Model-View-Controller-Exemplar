@@ -3,7 +3,7 @@
         {{#if makePost}}
             {{> post-form}}
         {{else}}
-            {{#each post as |post|}}
+            {{#each posts as |post|}}
                 {{> single-post}}
             {{/each}}
         {{/if}}
