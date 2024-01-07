@@ -53,11 +53,11 @@ router.post('/login', async (req, res) => {
     });
 
     console.log(req.session.loggedIn)
-
+    
     res
     .status(200)
     .render('dashboard', {
-      loggedIn: true,
+      loggedIn: req.session.loggedIn,
     });
 
   } catch (err) {
