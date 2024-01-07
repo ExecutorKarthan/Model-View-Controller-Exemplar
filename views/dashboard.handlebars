@@ -1,13 +1,21 @@
 <div class="dashboard">
     <section class="flex-row justify-center">
-        {{#if makePost}}
-            {{> post-form}}
-        {{else}}
-            {{#each posts as |post|}}
-                {{> single-post}}
-            {{/each}}
+        {{#if updatePost}}
+            {{> edit-post}}
         {{/if}}
+        {{#if makePost}}
+            {{> create-post}}
+        {{/if}}
+        {{#unless makePost}}
+            {{#unless updatePost}}
+                {{#each posts as |post|}}
+                    {{> dashboard-post}}
+                {{/each}} 
+            {{/unless}}
+        {{/unless}}
     </section>
+    {{#unless updatePost}}
     <button type="click" class="btn btn-primary" id="new-post-form">+ New Post</button>
+    {{/unless}}
 </div>
 <script src="./js/dashboard.js"></script>

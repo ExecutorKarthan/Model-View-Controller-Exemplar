@@ -11,9 +11,14 @@ router.get('/', async (req, res) => {
       post.get({ plain: true })
     );
 
+    req.session.save(() =>{
+      req.session.inDash = false;
+    })
+
     res.render('home', {
       posts,
       loggedIn: req.session.loggedIn,
+      inDash: req.session.inDash,
     });
   } catch (err) {
     console.log(err);
@@ -31,10 +36,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
+    req.session.save(() =>{
+      req.session.inDash = true;
+    })
+
     res.render('dashboard', {
       ...user,
       loggedIn: renderSelector(req.session.loggedIn),
       makePost: renderSelector(req.session.makePost),
+      inDash: renderSelector(req.session.inDash),
     });
   } catch (err) {
     res.status(500).json(err);

@@ -23,7 +23,6 @@ router.post('/post-form', withAuth, async (req, res) =>{
 router.post('/create-post', withAuth, async (req, res) => {
   try {
     const createdDate = new Date();
-    console.log(req.body)
     const newPost = await Post.create({
       title: req.body.title,
       posted_date: createdDate,
@@ -43,6 +42,50 @@ router.post('/create-post', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.post('/update-post', withAuth, async (req, res) => {
+  try {
+    const createdDate = new Date();
+    console.log(req.body)
+
+    const postUpdate = await Post.update({
+      title: req.body.title,
+      body: req.body.body,
+
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+
+
+
+    res.status(200).render('dashboard', {
+      
+    });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.post('/:id', withAuth, async (req, res) =>{
+  try{
+    req.session.save(() => {
+      req.session.updatePost = true;
+    });
+
+    res
+    .status(200)
+    .render('dashboard', {
+      updatePost: req.session.updatePost,
+    });
+  }
+  catch{
+    console.log(err);
+    res.status(500).json(err);
+  }
+})
 
 router.delete('/:id', withAuth, async (req, res) => {
   try {
