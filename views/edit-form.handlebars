@@ -1,12 +1,15 @@
 <form class = "form post-update-form">
+    <p>{{title}}</p>
     <div class="form-group">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-input" id="update-post-title" value={{post.title}}>
+        <input type="text" class="form-input" id="update-post-title" value="{{title}}">
     </div>
     <div class="form-group">
         <label for="content" class="form-label">Content</label>
-        <input type="text" class="form-input" id="update-post-content" value={{post.body}}>
+        <input type="text" class="form-input" id="update-post-content" value="{{body}}">
     </div>
     <button type="submit" class="btn btn-primary" id="update-post">Update Post</button>
     <button type="submit" class="btn btn-primary" id="delete-post">Delete Post</button>
 </form>
+
+<script src="./js/edit-post.js"></script>

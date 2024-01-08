@@ -51,6 +51,17 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+router.get('/dashboard/edit-post', withAuth, async (req, res) => {
+  try {
+    res.render('edit-form', {
+      title: renderSelector(req.session.postTitle),
+      body: renderSelector(req.session.postBody),
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/login', (req, res) => {
     res.render('login');
   });

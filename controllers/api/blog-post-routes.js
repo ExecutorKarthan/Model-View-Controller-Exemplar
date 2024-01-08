@@ -43,6 +43,31 @@ router.post('/create-post', withAuth, async (req, res) => {
   }
 });
 
+router.post('/edit-form', withAuth, async (req, res) => {
+  try {
+
+    const postData = await Post.findByPk(req.body.id, {
+    });
+
+    const post = postData.get({ plain: true });
+
+    req.session.save(() => {
+      req.session.postTitle = post.title;
+      req.session.postBody = post.body;
+    });
+
+    console.log(post)
+
+    res.render('edit-form', {
+      title: post.title,
+      body: post.body,
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.post('/update-post', withAuth, async (req, res) => {
   try {
     const createdDate = new Date();
