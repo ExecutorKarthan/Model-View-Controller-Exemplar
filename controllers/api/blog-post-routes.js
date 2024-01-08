@@ -54,13 +54,15 @@ router.post('/edit-form', withAuth, async (req, res) => {
     req.session.save(() => {
       req.session.postTitle = post.title;
       req.session.postBody = post.body;
+      req.session.postId = post.id;
     });
 
-    console.log(post)
+    console.log(req.session.postId)
 
     res.render('edit-form', {
-      title: post.title,
-      body: post.body,
+      title: req.session.postTitle,
+      body: req.session.postTitle,
+      id: req.session.postId
     });
 
   } catch (err) {
@@ -68,26 +70,23 @@ router.post('/edit-form', withAuth, async (req, res) => {
   }
 });
 
-router.post('/update-post', withAuth, async (req, res) => {
+router.put('/update-post', withAuth, async (req, res) => {
   try {
-    const createdDate = new Date();
+
     console.log(req.body)
+
+    const createdDate = new Date();
 
     const postUpdate = await Post.update({
       title: req.body.title,
-      body: req.body.body,
-
+      body: req.body.content,},
+      {
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      },
+        id: req.body.id,
+      }
     });
 
-
-
-    res.status(200).render('dashboard', {
-      
-    });
+    res.status(200).render('dashboard')
 
   } catch (err) {
     res.status(400).json(err);

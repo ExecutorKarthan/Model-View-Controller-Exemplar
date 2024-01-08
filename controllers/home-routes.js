@@ -56,6 +56,7 @@ router.get('/dashboard/edit-post', withAuth, async (req, res) => {
     res.render('edit-form', {
       title: renderSelector(req.session.postTitle),
       body: renderSelector(req.session.postBody),
+      id: renderSelector(req.session.postId)
     });
   } catch (err) {
     res.status(500).json(err);

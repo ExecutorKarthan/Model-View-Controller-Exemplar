@@ -49,6 +49,48 @@ const updatePostClicked = async (event) =>{
   }
 };
 
+const updatePostHandler = async (event) => {
+  event.preventDefault();
+  
+  const title = document.querySelector('#update-post-title').value.trim();
+  const content = document.querySelector('#update-post-content').value.trim();
+  const id = document.querySelector("form").getAttribute('data_id');
+
+  console.log(title, content, id)
+
+  if(title && content){
+    const response = await fetch('/api/bpr/update-post', {
+      method: 'PUT',
+      body: JSON.stringify({ title, content, id }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(response)
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } 
+    else {
+      alert(response.statusText);
+    }
+  }  
+}
+
+const deletePostHandler = async (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+
+    const response = await fetch(`/api/projects/${id}`, {
+      method: 'DELETE',
+    });
+
+  if (response.ok) {
+    document.location.replace('/dashboard');
+  } 
+  else {
+    alert(response.statusText);
+  }  
+}
+}
+
 if(document.querySelector('#new-post-form') != null){
   document
     .querySelector('#new-post-form')
@@ -66,4 +108,18 @@ if(document.querySelector('.update-link') != null){
   buttonList.forEach((buttonItem) =>{
     buttonItem.addEventListener('click', updatePostClicked)
   })
+}
+
+if(document.querySelector('#update-post') != null){
+  console.log("Delete button found")
+  document
+  .querySelector('#update-post')
+  .addEventListener('click', updatePostHandler); 
+}
+
+if(document.querySelector('#delete-post') != null){
+  console.log("Delete button found")
+  document
+  .querySelector('#delete-post')
+  .addEventListener('click', deletePostHandler); 
 }
