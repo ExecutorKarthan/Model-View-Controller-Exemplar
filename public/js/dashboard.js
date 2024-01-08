@@ -75,12 +75,16 @@ const updatePostHandler = async (event) => {
 }
 
 const deletePostHandler = async (event) => {
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
+  event.preventDefault();
+  const id = document.querySelector("form").getAttribute('data_id');
 
-    const response = await fetch(`/api/projects/${id}`, {
-      method: 'DELETE',
-    });
+  console.log(`/api/bpr/${id}`)
+
+  const response = await fetch(`/api/bpr/${id}`, {
+    method: 'DELETE',
+  });
+
+  console.log(response)
 
   if (response.ok) {
     document.location.replace('/dashboard');
@@ -88,7 +92,6 @@ const deletePostHandler = async (event) => {
   else {
     alert(response.statusText);
   }  
-}
 }
 
 if(document.querySelector('#new-post-form') != null){
@@ -111,14 +114,12 @@ if(document.querySelector('.update-link') != null){
 }
 
 if(document.querySelector('#update-post') != null){
-  console.log("Delete button found")
   document
   .querySelector('#update-post')
   .addEventListener('click', updatePostHandler); 
 }
 
 if(document.querySelector('#delete-post') != null){
-  console.log("Delete button found")
   document
   .querySelector('#delete-post')
   .addEventListener('click', deletePostHandler); 
