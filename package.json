@@ -4,7 +4,7 @@
   "description": "This is a mock tech blog that illistrates the use of the MVC ideaology",
   "main": "server.js",
   "scripts": {
-    "test": "jtest"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
