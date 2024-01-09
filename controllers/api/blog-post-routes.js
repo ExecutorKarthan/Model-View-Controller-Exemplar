@@ -47,6 +47,9 @@ router.put('/add-comment/:id', withAuth, async (req, res) => {
 
     let date = new Date();
     date = date.toLocaleDateString()
+
+    const userData = await User.findByPk(req.session.user_id)
+
     const postData = await Post.findByPk(req.body.id, {
       include: [
         {
@@ -58,25 +61,14 @@ router.put('/add-comment/:id', withAuth, async (req, res) => {
 
     let oldComments = postData.comments
 
-    let newComment = `${req.body.content} \n -${postData.user.dataValues.username}, ${date};`
-    
-    console.log("Initial comment", oldComments)
-
-    console.log("New comment", newComment)
-
-    console.log(oldComments == null)
+    let newComment = `${req.body.content} \n -${userData.username}, ${date};`
 
     if(oldComments == null){
-      console.log("comments are ", newComment," in the if")
       oldComments = newComment;
     }
     else{
-      console.log("comments are added")
       oldComments = oldComments + newComment;
     }
-
-    console.log("Here are the comments", oldComments)
-
 
     const postUpdate = await Post.update({
       comments: oldComments,
@@ -94,11 +86,8 @@ router.put('/add-comment/:id', withAuth, async (req, res) => {
   }
 });
 
-router.delete('/:id', withAuth, async (req, res) => {
-  console.log(req.params.id)
-  
+router.delete('/:id', withAuth, async (req, res) => {  
   try {
-    console.log(req.params.id)
     const postData = await Post.destroy({
       where: {
         id: req.params.id,

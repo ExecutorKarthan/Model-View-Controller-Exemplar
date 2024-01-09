@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
     res.render('home', {
       posts,
       loggedIn: req.session.loggedIn,
-      inDash: req.session.inDash,
     });
   } catch (err) {
     console.log(err);
@@ -21,7 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
@@ -38,11 +37,7 @@ router.get('/post/:id', async (req, res) => {
     
     const post = postData.get({plain: true});
 
-    console.log(post)
-
     post.comments = post.comments.split(";")
-
-    console.log(post.comments)
     
     res.render('single-post', {
       post,
