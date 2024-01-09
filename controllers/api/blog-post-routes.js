@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User } = require('../../models');
 const withAuth = require('../../utilities/auth');
 
 router.post('/create-post', withAuth, async (req, res) => {
@@ -24,8 +24,6 @@ router.post('/create-post', withAuth, async (req, res) => {
 router.put('/update-post/:id', withAuth, async (req, res) => {
   try {
 
-    console.log(req.body)
-
     const createdDate = new Date();
 
     const postUpdate = await Post.update({
@@ -37,7 +35,59 @@ router.put('/update-post/:id', withAuth, async (req, res) => {
       }
     });
 
-    res.status(200).render('dashboard')
+    res.status(200).json(postUpdate)
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put('/add-comment/:id', withAuth, async (req, res) => {
+  try {
+
+    let date = new Date();
+    date = date.toLocaleDateString()
+    const postData = await Post.findByPk(req.body.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    })
+
+    let oldComments = postData.comments
+
+    let newComment = `${req.body.content} \n -${postData.user.dataValues.username}, ${date};`
+    
+    console.log("Initial comment", oldComments)
+
+    console.log("New comment", newComment)
+
+    console.log(oldComments == null)
+
+    if(oldComments == null){
+      console.log("comments are ", newComment," in the if")
+      oldComments = newComment;
+    }
+    else{
+      console.log("comments are added")
+      oldComments = oldComments + newComment;
+    }
+
+    console.log("Here are the comments", oldComments)
+
+
+    const postUpdate = await Post.update({
+      comments: oldComments,
+      },
+      {
+      where: {
+        id: req.body.id,
+      }
+    });
+
+    res.status(200).json(postUpdate)
 
   } catch (err) {
     res.status(400).json(err);

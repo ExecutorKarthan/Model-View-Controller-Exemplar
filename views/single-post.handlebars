@@ -1,0 +1,32 @@
+<section class="container" post_id="{{post.id}}">
+  <div class = "row">
+    <div class="col-md">
+        <p>{{post.title}}</p>
+    </div>
+    <div class="col-md">
+        <p>{{formatDate post.posted_date}}</p>
+    </div>
+  </div>
+  <div class = "row">
+        <p>{{post.body}}</p>
+  </div>
+  {{#each post.comment as |comment|}}
+    <div class="col-md">
+    </div>
+    <div class="col-md">
+        <p>{{comment}}</p>
+    </div>
+  {{/each}}
+</section>
+
+<section class="container">
+  <div class = "row">
+        <label for="content" class="comment-label">Comment</label>
+        <input type="text" class="form-input" id="comment-body">
+    </div>
+  <div class = "row">
+    <button type="submit" class="btn btn-primary" id="submit-comment">Submit</button>
+  </div>
+</section>
+
+<script src="../../js/comment.js"></script>

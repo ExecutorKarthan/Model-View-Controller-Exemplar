@@ -21,6 +21,31 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/post/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
+
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+        }
+      ]
+    })
+    
+    const post = postData.get({plain: true});
+    
+    res.render('single-post', {
+      post,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
@@ -61,7 +86,6 @@ router.get('/dashboard/create-post', withAuth, async (req, res) => {
 
 router.get('/dashboard/edit-post/:id', withAuth, async (req, res) => {
   try {
-
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Post }],

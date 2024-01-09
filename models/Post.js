@@ -25,7 +25,8 @@ Post.init(
     },
     comments: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: "",
     },
     user_id: {
       type: DataTypes.INTEGER,

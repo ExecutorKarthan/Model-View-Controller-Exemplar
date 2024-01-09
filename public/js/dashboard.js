@@ -30,8 +30,6 @@ const updatePostHandler = async (event) => {
   const content = document.querySelector('#update-post-content').value.trim();
   const id = document.querySelector("form").getAttribute('data_id');
 
-  console.log(title, content, id)
-
   if(title && content){
     const response = await fetch(`/api/bpr/update-post/${id}`, {
       method: 'PUT',
