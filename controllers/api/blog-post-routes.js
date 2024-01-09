@@ -2,24 +2,6 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utilities/auth');
 
-router.post('/post-form', withAuth, async (req, res) =>{
-  try{
-    req.session.save(() => {
-      req.session.makePost = true;
-    });
-
-    res
-    .status(200)
-    .render('dashboard', {
-      makePost: req.session.makePost,
-    });
-  }
-  catch{
-    console.log(err);
-    res.status(500).json(err);
-  }
-})
-
 router.post('/create-post', withAuth, async (req, res) => {
   try {
     const createdDate = new Date();
@@ -30,47 +12,16 @@ router.post('/create-post', withAuth, async (req, res) => {
       user_id: req.session.user_id
     });
 
-    req.session.save(() => {
-      req.session.makePost = false;
-    });
 
-    res.status(200).render('dashboard', {
-      makePost: req.session.makePost,
-    });
+    res.status(200).json(newPost);
 
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.post('/edit-form', withAuth, async (req, res) => {
-  try {
 
-    const postData = await Post.findByPk(req.body.id, {
-    });
-
-    const post = postData.get({ plain: true });
-
-    req.session.save(() => {
-      req.session.postTitle = post.title;
-      req.session.postBody = post.body;
-      req.session.postId = post.id;
-    });
-
-    console.log(req.session.postId)
-
-    res.render('edit-form', {
-      title: req.session.postTitle,
-      body: req.session.postTitle,
-      id: req.session.postId
-    });
-
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.put('/update-post', withAuth, async (req, res) => {
+router.put('/update-post/:id', withAuth, async (req, res) => {
   try {
 
     console.log(req.body)
@@ -92,24 +43,6 @@ router.put('/update-post', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-
-router.post('/:id', withAuth, async (req, res) =>{
-  try{
-    req.session.save(() => {
-      req.session.updatePost = true;
-    });
-
-    res
-    .status(200)
-    .render('dashboard', {
-      updatePost: req.session.updatePost,
-    });
-  }
-  catch{
-    console.log(err);
-    res.status(500).json(err);
-  }
-})
 
 router.delete('/:id', withAuth, async (req, res) => {
   console.log(req.params.id)

@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { User, Post } = require('../models');
 const withAuth = require('../utilities/auth');
-const renderSelector = require('../utilities/renderSelector');
 
 router.get('/', async (req, res) => {
   try {
@@ -10,10 +9,6 @@ router.get('/', async (req, res) => {
     const posts = postData.map((post) =>
       post.get({ plain: true })
     );
-
-    req.session.save(() =>{
-      req.session.inDash = false;
-    })
 
     res.render('home', {
       posts,
@@ -36,27 +31,60 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    req.session.save(() =>{
-      req.session.inDash = true;
-    })
+    const posts = user.posts
 
     res.render('dashboard', {
-      ...user,
-      loggedIn: renderSelector(req.session.loggedIn),
-      makePost: renderSelector(req.session.makePost),
-      inDash: renderSelector(req.session.inDash),
+      posts,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/dashboard/edit-post', withAuth, async (req, res) => {
+router.get('/dashboard/create-post', withAuth, async (req, res) => {
   try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const posts = user.posts
+    
+    res.render('create-post');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/dashboard/edit-post/:id', withAuth, async (req, res) => {
+  try {
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    const posts = user.posts
+
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+        }
+      ]
+    })
+    
+    const post = postData.get({plain: true});
+
+    console.log(post)
+    
     res.render('edit-form', {
-      title: renderSelector(req.session.postTitle),
-      body: renderSelector(req.session.postBody),
-      id: renderSelector(req.session.postId)
+      post,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -64,7 +92,10 @@ router.get('/dashboard/edit-post', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('login');
+  if(req.session.loggedIn){
+    res.redirect('/dashboard')
+  }
+  res.render('login');
   });
 
 router.get('/signup', (req, res) => {

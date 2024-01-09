@@ -1,14 +1,7 @@
 const createPostClicked = async (event) =>{
   event.preventDefault();
   console.log("+New Post button clicked")
-  const response = await fetch('/api/bpr/post-form', {
-    method: 'POST',
-    body: JSON.stringify({}),
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (response.ok) {
-    document.location.replace('/dashboard');
-    } 
+  document.location.replace('/dashboard/create-post');
 }
 
 const newPostHandler = async (event) => {
@@ -30,25 +23,6 @@ const newPostHandler = async (event) => {
     }  
   };
 
-const updatePostClicked = async (event) =>{
-  console.log("Update post was clicked")
-
-  const id = event.target.getAttribute('data_id');
-  
-  const response = await fetch(`/api/bpr/edit-form`, {
-    method: 'POST',
-    body: JSON.stringify({id}),
-    headers: {'Content-Type': 'application/json' },
-  });
-
-  if (response.ok) {
-    document.location.replace('/dashboard/edit-post');
-  } 
-  else {
-    alert(response.statusText);
-  }
-};
-
 const updatePostHandler = async (event) => {
   event.preventDefault();
   
@@ -59,7 +33,7 @@ const updatePostHandler = async (event) => {
   console.log(title, content, id)
 
   if(title && content){
-    const response = await fetch('/api/bpr/update-post', {
+    const response = await fetch(`/api/bpr/update-post/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ title, content, id }),
       headers: { 'Content-Type': 'application/json' },
@@ -104,13 +78,6 @@ if(document.querySelector('#create-post') != null){
   document
     .querySelector('#create-post')
     .addEventListener('click', newPostHandler); 
-}
-
-if(document.querySelector('.update-link') != null){
-  const buttonList = document.querySelectorAll('.update-link')
-  buttonList.forEach((buttonItem) =>{
-    buttonItem.addEventListener('click', updatePostClicked)
-  })
 }
 
 if(document.querySelector('#update-post') != null){

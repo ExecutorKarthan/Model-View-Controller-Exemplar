@@ -12,18 +12,11 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-      req.session.inDash = true;
+      res
+      .status(200)
+      .json(dbUserData)
     });
 
-    console.log(req.session.loggedIn)
-    console.log(req.session)
-    
-    res
-    .status(200)
-    .render('dashboard', {
-      loggedIn: req.session.loggedIn,
-      inDash: req.session.inDash,
-    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -54,25 +47,16 @@ router.post('/login', async (req, res) => {
         .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
-    console.log("Saving session data")
+
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.loggedIn = true;
-      req.session.inDash = true;
+      res
+      .status(200)
+      .json(dbUserData)
     });
-
-    console.log(req.session.loggedIn)
-    console.log(req.session)
-    
-    res
-    .status(200)
-    .render('dashboard', {
-      loggedIn: req.session.loggedIn,
-      inDash: req.session.inDash,
-    });
-
+       
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
