@@ -37,6 +37,12 @@ router.get('/post/:id', async (req, res) => {
     })
     
     const post = postData.get({plain: true});
+
+    console.log(post)
+
+    post.comments = post.comments.split(";")
+
+    console.log(post.comments)
     
     res.render('single-post', {
       post,
