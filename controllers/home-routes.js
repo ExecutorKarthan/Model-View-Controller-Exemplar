@@ -7,7 +7,14 @@ const withAuth = require('../utilities/auth');
 router.get('/', async (req, res) => {
   try {
     //Collect all the post data then parse it to get the plain data
-    const postData = await Post.findAll();
+    const postData = await Post.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        }
+      ]
+    });
     const posts = postData.map((post) =>
       post.get({ plain: true })
     );
