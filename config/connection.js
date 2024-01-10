@@ -1,9 +1,14 @@
+//Import required libraries
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
+//Establish database connection
+//Connect to Heroku Database
 if(process.env.JAWSDB_URL){
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 }
+
+//If run locally, use local settings for the database
 else{
   sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -17,4 +22,5 @@ else{
   );
 }
 
+//Export configuration data
 module.exports = sequelize;

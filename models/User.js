@@ -1,13 +1,16 @@
+//Import dependencies
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class User extends Model {
+  //Verify the entered password with the password in the database
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
 
+//Define the attributes to the model
 User.init(
   {
     id: {
@@ -24,11 +27,12 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [3],
+        len: [8],
       },
     },
   },
   {
+    //Hash the entered password and save it to the database
     hooks: {
       async beforeCreate(newUserData) {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
@@ -43,4 +47,5 @@ User.init(
   }
 );
 
+//Export the model for use
 module.exports = User;

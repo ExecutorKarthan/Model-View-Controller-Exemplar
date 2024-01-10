@@ -1,6 +1,10 @@
-<section class="container" post_id="{{post.id}}">
-  <div class = "row">
-    <div class="col-md">
+<head>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<section class="container card" post_id="{{post.id}}">
+  <div class = "row" id="card-heading">
+    <div class="col-md" >
         <p>Title: {{post.title}}</p>
     </div>
     <div class="col-auto">
@@ -10,14 +14,15 @@
   <div class = "row">
       <p>{{post.body}}</p>
   </div>
-  {{#each post.comments as |comment|}}
-    <div class="col-md">
-    </div>
-    <div class="col-md">
-        <p>{{comment}}</p>
-    </div>
-  {{/each}}
 </section>
+
+{{#each post.comments as |comment|}}
+  <div class="col-md card">
+  </div>
+  <div class="col-md">
+      <p>{{comment}}</p>
+  </div>
+{{/each}}
 
 {{#if loggedIn}}
 <section class="container">
@@ -32,3 +37,4 @@
 </section>
 
 <script src="../../js/comment.js"></script>
+<script src="../../js/logout.js"></script>

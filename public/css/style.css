@@ -16,3 +16,7 @@ a, button{
     text-decoration: none;
     border-radius: 20px;
 }
+
+#card-heading{
+    background-color: #FF4081;
+}

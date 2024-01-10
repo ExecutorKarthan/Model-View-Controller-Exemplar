@@ -1,8 +1,10 @@
+//Import dependencies
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Post extends Model {}
 
+//Define the attributes to the model
 Post.init(
   {
     id: {
@@ -44,4 +46,5 @@ Post.init(
   }
 );
 
+//Export the model for use
 module.exports = Post;
