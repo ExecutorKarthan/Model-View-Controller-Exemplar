@@ -37,10 +37,12 @@ router.get('/post/:id', async (req, res) => {
     })
     //Process the data into plain values
     const post = postData.get({plain: true});
+    const user = postData.user
     //Split the comments into an array to be rendered
     post.comments = post.comments.split(";")
     //Render each post with its comments
     res.render('single-post', {
+      user,
       post,
       loggedIn: req.session.loggedIn,
     });
@@ -123,5 +125,5 @@ router.get('/signup', (req, res) => {
     res.render('signup');
   });
 
-  //Export the newly adjusted router
+//Export the newly adjusted router
 module.exports = router;
