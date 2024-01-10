@@ -1,14 +1,14 @@
 <section class="container" post_id="{{post.id}}">
   <div class = "row">
     <div class="col-md">
-        <p>{{post.title}}</p>
+        <p>Title: {{post.title}}</p>
     </div>
-    <div class="col-md">
-        <p>{{formatDate post.posted_date}}</p>
+    <div class="col-auto">
+        <p>Posted by {{post.user.username}} on {{formatDate post.posted_date}}</p>
     </div>
   </div>
   <div class = "row">
-        <p>{{post.body}}</p>
+      <p>{{post.body}}</p>
   </div>
   {{#each post.comments as |comment|}}
     <div class="col-md">
@@ -19,14 +19,16 @@
   {{/each}}
 </section>
 
+{{#if loggedIn}}
 <section class="container">
   <div class = "row">
-        <label for="content" class="comment-label">Comment</label>
-        <input type="text" class="form-input" id="comment-body">
-    </div>
+    <label for="content" class="comment-label">Comment</label>
+    <input type="text" class="form-input" id="comment-body">
+  </div>
   <div class = "row">
     <button type="submit" class="btn btn-primary" id="submit-comment">Submit</button>
   </div>
+{{/if}}
 </section>
 
 <script src="../../js/comment.js"></script>

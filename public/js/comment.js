@@ -11,7 +11,7 @@ const addComment = async (event) => {
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
-        document.location.replace('/');
+        document.location.replace(`/post/${id}`);
       } 
       else {
         alert(response.statusText);

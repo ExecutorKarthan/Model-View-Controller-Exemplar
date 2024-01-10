@@ -1,6 +1,5 @@
 const createPostClicked = async (event) =>{
   event.preventDefault();
-  console.log("+New Post button clicked")
   document.location.replace('/dashboard/create-post');
 }
 

@@ -20,17 +20,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
-    });
-
     const postData = await Post.findByPk(req.params.id, {
       include: [
         {
           model: User,
+          attributes: ['username'],
         }
       ]
     })
@@ -41,6 +37,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
     
     res.render('single-post', {
       post,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -76,10 +73,10 @@ router.get('/dashboard/create-post', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-
-    const posts = user.posts
     
-    res.render('create-post');
+    res.render('create-post',{
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -87,26 +84,16 @@ router.get('/dashboard/create-post', withAuth, async (req, res) => {
 
 router.get('/dashboard/edit-post/:id', withAuth, async (req, res) => {
   try {
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
-    });
-
-    const user = userData.get({ plain: true });
-
-    const posts = user.posts
-
     const postData = await Post.findByPk(req.params.id, {
       include: [
         {
           model: User,
+          attributes: ['username'],
         }
       ]
     })
     
     const post = postData.get({plain: true});
-
-    console.log(post)
     
     res.render('edit-form', {
       post,
