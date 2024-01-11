@@ -21,7 +21,7 @@ The user must also have a .env file with their SQL credentials stored for the pr
 ## Usage
 Once installed, the user needs to start their npm server with the command '''npm start''. Then the user can navigate to "hostlocal:3001" to see the app. Alternatively, a user can navigate to [https://mvc-demo-blog-app-f4dd43ae92f7.herokuapp.com/](https://mvc-demo-blog-app-f4dd43ae92f7.herokuapp.com/). From there, the user can have the web experience of the app. 
 
-A video walkthrough of the locally deployed app can be found <a href="./assets/MVC Exemplar.mp4.mp4"> here</a>.
+A video walkthrough of the locally deployed app can be found <a href="./assets/MVC Exemplar.mp4"> here</a>.
 
 ## License
 This product is protected by a [MIT License](http://choosealicense.com/licenses/mit).
