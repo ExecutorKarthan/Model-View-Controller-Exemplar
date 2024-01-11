@@ -1,12 +1,16 @@
+{{!-- Create a card to display posts --}}
 <section class="card">
-  <div class = "row">
+  <div class = "row" id="card-heading">
+    {{!-- Create a link to edit the post with its id and title --}}
     <div class="col-md" id="name">
-        <a href="/post/{{id}}">{{title}}</a>
+        <a href="/post/{{id}}" id="home-post-title">{{title}}</a>
     </div>
+    {{!-- Load the code so it has who posted it and when --}}
     <div class="col-auto" id="date">
         <p>Posted by {{user.username}} on {{formatDate posted_date}}</p>
     </div>
   </div>
+  {{!-- Load the rest of the page --}}
   <div class = "row" id="body">
     <h2>{{body}}</h2>
   </div>

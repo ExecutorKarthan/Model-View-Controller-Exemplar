@@ -112,6 +112,7 @@ router.get('/dashboard/edit-post/:id', withAuth, async (req, res) => {
     //Render the form to allow users to edit their posts
     res.render('edit-form', {
       post,
+      loggedIn: req.session.loggedIn,
     });
     //If there is an error, return the error code
   } catch (err) {

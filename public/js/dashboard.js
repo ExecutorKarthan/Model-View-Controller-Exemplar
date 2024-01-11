@@ -29,7 +29,7 @@ const newPostHandler = async (event) => {
     }  
   };
 
-  //Create a function to Connect the HTML to the route
+//Create a function to Connect the HTML to the route
 const updatePostHandler = async (event) => {
   //Prevent the page from reloading
   event.preventDefault();
@@ -55,6 +55,7 @@ const updatePostHandler = async (event) => {
   }  
 }
 
+//Create a function to Connect the HTML to the route
 const deletePostHandler = async (event) => {
   //Prevent the page from reloading
   event.preventDefault();

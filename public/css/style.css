@@ -1,8 +1,11 @@
+
+/*Set default color and font size for the page*/
 body{
     background: #F5F5F5;
     font-size: 24px;
 }
 
+/*Style the buttons*/
 a, button{
     color: #FF4081;
     text-decoration: none;
@@ -10,6 +13,12 @@ a, button{
     border: none;
 }
 
+#logout{
+    background: none;
+    border: none; 
+}
+
+/*Style the post text*/
 .card{
     border-style: solid;
     background: #ebebeb;
@@ -19,4 +28,11 @@ a, button{
 
 #card-heading{
     background-color: #FF4081;
+    border-radius: 15px;
+}
+
+#post-title, #home-post-title{
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
 }

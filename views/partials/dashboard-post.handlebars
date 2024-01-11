@@ -1,8 +1,11 @@
+{{!-- Create a card to display posts --}}
 <section class="card">
   <div class = "row">
+    {{!-- Create a link to edit the post with its id and title --}}
     <div class="col-md" id="name">
         <a href="/dashboard/edit-post/{{id}}">{{title}}</a>
     </div>
+    {{!-- Display the formatted date of when the post was made --}}
     <div class="col-auto" id="date">
         <p>{{formatDate posted_date}}</p>
     </div>

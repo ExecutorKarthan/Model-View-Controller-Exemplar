@@ -1,16 +1,21 @@
+{{!-- Create a form that collects data for users to log in --}}
 <form class = "form login-form">
   <div class="form-group">
+    {{!-- Create a box to let the user enter in a username and label the box --}}
     <label for="username-label" class="form-label">Username</label>
     <input type="text" class="form-input" id="username-entered">
   </div>
   <div class="form-group">
+    {{!-- Create a box to let the user enter in a password and label the box --}}
     <label for="password-label" class="form-label">Password</label>
     <input type="password" class="form-input" id="password-entered">
   </div>
+  {{!-- Create a link to go to the sign up page --}}
   <div class="form-group">
     <a href="/signup">Sign up instead</a>
   </div>
+  {{!-- Create a submission button to send the log in data --}}
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
-
-<script src="./js/login.js"></script>
+{{!-- Load the script to handle logging in --}}
+<script src="/js/login.js"></script>

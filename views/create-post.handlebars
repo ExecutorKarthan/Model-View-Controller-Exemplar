@@ -1,14 +1,17 @@
-<link rel="stylesheet" href="../../css/style.css">
+{{!-- Create a form that collects data to make posts --}}
 <form class = "form login-form">
     <div class="form-group">
+        {{!-- Create a box to let the user enter in a post title and label the box --}}
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-input" id="post-title">
     </div>
     <div class="form-group">
+        {{!-- Create a box to let the user enter in post content and label the box --}}
         <label for="content" class="form-label">Content</label>
         <input type="text" class="form-input" id="post-content">
     </div>
+    {{!-- Create a button to send the inputted data to make a post --}}
     <button type="submit" class="btn btn-primary" id="create-post">Create</button>
 </form>
-<script src="../js/dashboard.js"></script>
-<script src="../js/logout.js"></script>
+{{!-- Load the needed script to handle post creation --}}
+<script src="/js/dashboard.js"></script>

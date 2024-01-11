@@ -1,16 +1,18 @@
-<link rel="stylesheet" href="../../css/style.css">
+{{!-- Create a form that collects data to update or delete posts --}}
 <form class = "form post-update-form" data_id="{{post.id}}">
     <div class="form-group">
+        {{!-- Create a box to let the user enter in a post title and label the box --}}
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-input" id="update-post-title" value="{{post.title}}">
     </div>
     <div class="form-group">
+        {{!-- Create a box to let the user enter in post content and label the box --}}
         <label for="content" class="form-label">Content</label>
         <input type="text" class="form-input" id="update-post-content" value="{{post.body}}">
     </div>
+    {{!-- Create buttons to update and delete posts --}}
     <button type="submit" class="btn btn-primary" id="update-post">Update Post</button>
     <button type="submit" class="btn btn-primary" id="delete-post">Delete Post</button>
 </form>
-
-<script src="../../../js/dashboard.js"></script>
-<script src="../../../js/logout.js"></script>
+{{!-- Load the script to handle rendering items in the dashboard --}}
+<script src="/js/dashboard.js"></script>

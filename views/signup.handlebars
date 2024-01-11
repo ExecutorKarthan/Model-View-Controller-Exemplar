@@ -1,16 +1,21 @@
+{{!-- Create a form that collects data for users to sign up --}}
 <form class="form signup-form">
   <div class="form-group">
+    {{!-- Create a box to let the user enter in a username and label the box --}}
     <label for="username-label" class="form-label">Username</label>
     <input type="text" class="form-input" id="signup-username" aria-describedby="emailHelp">
   </div>
   <div class="form-group">
+    {{!-- Create a box to let the user enter in a password and label the box --}}
     <label for="password-label" class="form-label">Password</label>
     <input type="password" class="form-input" id="signup-password">
   </div>
+  {{!-- Create a link to go to the login page --}}
   <div class="form-group">
     <a href="/login">Login instead</a>
   </div>
+  {{!-- Create a submission button to send the sign up data --}}
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
-
-<script src="./js/signup.js"></script>
+{{!-- Load the script to handle sign ups --}}
+<script src="/js/signup.js"></script>

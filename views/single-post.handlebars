@@ -1,21 +1,22 @@
-<head>
-<link rel="stylesheet" href="../../css/style.css">
-</head>
-
+{{!-- Create a card to display posts --}}
 <section class="container card" post_id="{{post.id}}">
+  {{!-- Create rows to render post titles --}}
   <div class = "row" id="card-heading">
+    {{!-- Create a column to hold the post title --}}
     <div class="col-md" >
-        <p>Title: {{post.title}}</p>
+        <p id="post-title">Title: {{post.title}}</p>
     </div>
+    {{!-- Create a column to hold the poster and when the post was made--}}
     <div class="col-auto">
         <p>Posted by {{user.dataValues.username}} on {{formatDate post.posted_date}}</p>
     </div>
   </div>
+  {{!-- Create a row to contain the post's body/content --}}
   <div class = "row">
       <p>{{post.body}}</p>
   </div>
 </section>
-
+{{!-- Create a series of cards that list the comments to a post --}}
 {{#each post.comments as |comment|}}
   <div class="col-md card">
   </div>
@@ -23,18 +24,18 @@
       <p>{{comment}}</p>
   </div>
 {{/each}}
-
+{{!-- If the user is logged in, create a field to let users add comments to posts --}}
 {{#if loggedIn}}
 <section class="container">
   <div class = "row">
     <label for="content" class="comment-label">Comment</label>
     <input type="text" class="form-input" id="comment-body">
   </div>
+  {{!-- Create a button to submit the comment data --}}
   <div class = "row">
     <button type="submit" class="btn btn-primary" id="submit-comment">Submit</button>
   </div>
 {{/if}}
 </section>
-
-<script src="../../js/comment.js"></script>
-<script src="../../js/logout.js"></script>
+{{!-- Load the script to handle appending comments --}}
+<script src="/js/comment.js"></script>
