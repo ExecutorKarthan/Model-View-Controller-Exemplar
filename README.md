@@ -6,7 +6,6 @@ This program was an excellent way for me to see all the pieces of the MVC ideolo
 
 This project was also important in helping me understand how make an app that requires secure log in. This app requires bcrypt to allow a user to save a stored, hashed password. This password is then used for verification to ensure a user is logged into their account. Without this login, the app will restrict user activity in the app until the user authenticates via logging in. This provided me a solid introduction to sessions and cookies, as my HTML is written to change its displayed data based on if the user is logged in. That is accomplished by storing if the user is sign in or not in a session cookie. 
 
-
 ## Installation
 This project requires the following packages to function:
 1) "dotenv" which can be found at [https://www.npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)
@@ -22,7 +21,7 @@ The user must also have a .env file with their SQL credentials stored for the pr
 ## Usage
 Once installed, the user needs to start their npm server with the command '''npm start''. Then the user can navigate to "hostlocal:3001" to see the app. Alternatively, a user can navigate to [https://mvc-demo-blog-app-f4dd43ae92f7.herokuapp.com/](https://mvc-demo-blog-app-f4dd43ae92f7.herokuapp.com/). From there, the user can have the web experience of the app. 
 
-A video walkthrough of the locally deployed app can be found <a href="./assets/E-commerce-backend.mp4"> here</a>.
+A video walkthrough of the locally deployed app can be found <a href="./assets/MVC Exemplar.mp4.mp4"> here</a>.
 
 ## License
 This product is protected by a [MIT License](http://choosealicense.com/licenses/mit).
@@ -34,6 +33,6 @@ I, Alex Messina, authored the majority of this code. Its layout and design was i
 No tests were prepared for this project. Error codes will be displayed by SQL if they occur and erratic behavior can be observed since the output is printed to console.
 
 ## Questions
-My GitHub username is [ExecutorKarthan](https://github.com/ExecutorKarthan) and this project can be found at [https://github.com/ExecutorKarthan/E-commerce-backend](https://github.com/ExecutorKarthan/E-commerce-backend)
+My GitHub username is [ExecutorKarthan](https://github.com/ExecutorKarthan) and this project can be found at [https://github.com/ExecutorKarthan/Model-View-Controller-Exemplar](https://github.com/ExecutorKarthan/Model-View-Controller-Exemplar)
 
 If you have questions or concerns about this project, please email me at me@alexmessina.dev
